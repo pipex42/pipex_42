@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: niccheva <niccheva@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/05/08 21:54:56 by niccheva          #+#    #+#             */
+/*   Updated: 2014/05/08 21:55:00 by niccheva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 int			ft_checkcmd(char *cmd, char *env)
@@ -14,14 +26,14 @@ int			ft_checkcmd(char *cmd, char *env)
 		tmp = ft_strjoin(envcp[i], "/");
 		tmp2 = ft_strjoin(tmp, cmd);
 		ft_strdel(&tmp);
-		if (access(tmp2, F_OK) >= 0)			
+		if (access(tmp2, F_OK) >= 0)
 		{
 			if (access(tmp2, X_OK) < 0)
 				ft_fatal_error("permission denied.");
 			ft_strdel(&tmp2);
 			ft_destroy_tab(envcp);
 			return (1);
-		}		
+		}
 		i++;
 		ft_strdel(&tmp2);
 	}
@@ -36,7 +48,7 @@ int			main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	
+
 	envset = ft_getenv("PATH", env);
 	if (ft_checkcmd("ls", envset))
 		ft_putendl("ok");
