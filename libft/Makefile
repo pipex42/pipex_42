@@ -1,69 +1,127 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dherz <dherz@student.42.fr>                +#+  +:+       +#+         #
+#    By: niccheva <niccheva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2014/03/13 23:31:04 by anramos           #+#    #+#              #
-#    Updated: 2014/04/19 05:45:25 by dherz            ###   ########.fr        #
+#    Created: 2014/04/14 08:52:45 by niccheva          #+#    #+#              #
+#    Updated: 2014/05/08 17:20:10 by niccheva         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 NAME	=	libft.a
-FLAGS	=	-Wall -Werror -Wextra
-GCC		=	gcc $(FLAGS)
-SRCS	=	ft_putchar.c \
-			ft_putstr.c \
-			ft_putnbr.c \
-			ft_strlen.c \
-			ft_strdup.c \
-			ft_strcat.c \
-			ft_strncat.c \
-			ft_memset.c \
-			ft_bzero.c \
-			ft_memcpy.c \
-			ft_memccpy.c \
-			ft_memmove.c \
-			ft_memchr.c \
-			ft_memcmp.c \
-			ft_memalloc.c \
-			ft_strcpy.c \
-			ft_strncpy.c \
-			ft_strchr.c \
-			ft_strrchr.c \
-			ft_strstr.c \
-			ft_strnstr.c \
-			ft_strcmp.c \
-			ft_strncmp.c \
-			ft_isalpha.c \
-			ft_isdigit.c \
-			ft_isalnum.c \
-			ft_isascii.c \
-			ft_isprint.c \
-			ft_toupper.c \
-			ft_tolower.c \
-			ft_atoi.c \
-			ft_strjoin.c \
-			ft_strsplit.c \
-			ft_strsub.c \
-			ft_strnew.c 
 
-OBJS	=	$(SRCS:.c=.o)
+FLAGS	=	-Wall -Wextra -Werror -ansi -pedantic -std=c89
+
+CC		=	gcc $(FLAGS)
+
+DINC	=	includes/
+DSRC	=	srcs/
+DOBJ	=	objs/
+
+SRC		=	ft_abs.c					\
+			ft_bzero.c					\
+			ft_ciradd_tail.c			\
+			ft_cirnew.c					\
+			ft_close.c					\
+			ft_count_tab.c				\
+			ft_destroy_tab.c			\
+			ft_fatal_error.c			\
+			ft_get_next_line.c			\
+			ft_isalnum.c				\
+			ft_isalpha.c				\
+			ft_isascii.c				\
+			ft_isdigit.c				\
+			ft_isprint.c				\
+			ft_isspace.c				\
+			ft_issigned.c				\
+			ft_itoa.c					\
+			ft_memalloc.c				\
+			ft_memccpy.c				\
+			ft_memchr.c					\
+			ft_memcmp.c					\
+			ft_memcpy.c					\
+			ft_memdel.c					\
+			ft_memmove.c				\
+			ft_memset.c					\
+			ft_open.c					\
+			ft_putchar.c				\
+			ft_putchar_fd.c				\
+			ft_putendl.c				\
+			ft_putendl_fd.c				\
+			ft_putnbr.c					\
+			ft_putnbr_fd.c				\
+			ft_putstr.c					\
+			ft_putstr_fd.c				\
+			ft_puttab.c					\
+			ft_strcat.c					\
+			ft_strchr.c					\
+			ft_strcmp.c					\
+			ft_strclr.c					\
+			ft_strcpy.c					\
+			ft_strdel.c					\
+			ft_strdup.c					\
+			ft_strequ.c					\
+			ft_striter.c				\
+			ft_striteri.c				\
+			ft_strjoin.c				\
+			ft_strlcat.c				\
+			ft_strlen.c					\
+			ft_strmap.c					\
+			ft_strmapi.c				\
+			ft_strncat.c				\
+			ft_strncmp.c				\
+			ft_strncpy.c				\
+			ft_strnequ.c				\
+			ft_strnew.c					\
+			ft_strnstr.c				\
+			ft_strrchr.c				\
+			ft_strsplit.c				\
+			ft_strstr.c					\
+			ft_strsub.c					\
+			ft_strtrim.c				\
+			ft_tolower.c				\
+			ft_toupper.c
+
+OBJ		=	$(patsubst %.c, $(DOBJ)%.o, $(SRC))
+
+DSRC	=	srcs/
+
+DOBJ	=	objs/
+
+DINC	=	includes/
+
+RMF		=	/bin/rm -f
+
+RMD		=	/bin/rm -Rf
+
+MKD		=	/bin/mkdir -p
 
 all: $(NAME)
 
-$(NAME):
-	$(GCC) $(SRCS) -c
-	ar -q $(NAME) $(OBJS)
-	ranlib $(NAME)
+$(DOBJ)%.o: $(DSRC)%.c
+	@$(MKD) $(DOBJ)
+	@echo "Compilation de l'objet:\033[0;32m"
+	$(CC) -o $@ -c $< -I $(DINC)
+	@echo "\033[0;m\c"
+
+$(NAME): $(OBJ)
+	@echo "Creation de la libft:\033[0;32m"
+	ar rcs $(NAME) $(OBJ)
+	@echo "\033[0;m\c"
 
 clean:
-	rm -rf $(OBJS)
-	
-fclean:	clean
-	@rm -rf $(NAME)
+	@echo "Suppression des objets de la libft:\033[0;31m"
+	$(RMF) $(OBJ)
+	@echo "\033[0;m\c"
+	@$(RMD) $(DOBJ)
 
-re:	clean fclean all
+fclean: clean
+	@echo "Suppression de la libft\033[0;31m"
+	$(RMF) $(NAME)
+	@echo "\033[0;m\c"
 
-.PHONY: all clean fclean re
+re: fclean all
+
+.PHONY: all libft libclean clean fclean re
