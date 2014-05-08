@@ -6,7 +6,7 @@
 #    By: niccheva <niccheva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/04/14 08:52:45 by niccheva          #+#    #+#              #
-#    Updated: 2014/05/08 17:20:10 by niccheva         ###   ########.fr        #
+#    Updated: 2014/05/08 18:36:12 by niccheva         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -55,6 +55,7 @@ SRC		=	ft_abs.c					\
 			ft_putstr.c					\
 			ft_putstr_fd.c				\
 			ft_puttab.c					\
+			ft_rejoin.c					\
 			ft_strcat.c					\
 			ft_strchr.c					\
 			ft_strcmp.c					\

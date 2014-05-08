@@ -6,7 +6,7 @@
 /*   By: niccheva <niccheva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/27 16:12:37 by niccheva          #+#    #+#             */
-/*   Updated: 2014/05/08 17:31:29 by niccheva         ###   ########.fr       */
+/*   Updated: 2014/05/08 18:36:00 by niccheva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr(char *s);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_puttab(char **tab);
+char		*ft_rejoin(char **cmd, char *c);
 char		*ft_strcat(char *s1, char const *s2);
 char		*ft_strchr(char const *s, int c);
 int			ft_strcmp(char const *s1, char const *s2);
