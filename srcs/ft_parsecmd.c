@@ -6,7 +6,7 @@
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/09 18:28:51 by anramos           #+#    #+#             */
-/*   Updated: 2014/05/09 19:53:13 by anramos          ###   ########.fr       */
+/*   Updated: 2014/05/09 20:16:08 by niccheva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 char		*ft_parsecmd(char *cenv, char *cmd)
 {
 	char	*tmp;
+	char	*tmp2;
 
 	tmp = ft_strjoin(cenv, "/");
-	ft_strjoin(tmp, cmd);
-	return (tmp);
+	tmp2 = ft_strjoin(tmp, cmd);
+	ft_strdel(&tmp);
+	return (tmp2);
 }
