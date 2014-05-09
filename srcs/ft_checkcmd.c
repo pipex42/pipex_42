@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_checkcmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/08 21:54:56 by niccheva          #+#    #+#             */
-/*   Updated: 2014/05/09 19:46:27 by anramos          ###   ########.fr       */
+/*   Created: 2014/05/09 19:43:38 by anramos           #+#    #+#             */
+/*   Updated: 2014/05/09 19:56:03 by anramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int			main(int ac, char **av, char **env)
+int			ft_checkcmd(char *cmd, char *env)
 {
-	char	*envset;
+	char	**envcp;
+	char	*tmp;
+	int		i;
 
-	(void)ac;
-	(void)av;
-
-	envset = ft_getenv("PATH", env);
-	if (ft_checkcmd("ls", envset))
-		ft_putendl("ok");
-	else
-		ft_putendl("NOT OK");
-	sleep(5000);
+	i = 0;
+	envcp = ft_strsplit(env, ':');
+	while (envcp[i])
+	{
+		tmp = ft_parsecmd(envcp[i], cmd);
+		if (access(tmp, F_OK) >= 0)
+		{
+			if (access(tmp, X_OK) < 0)
+				ft_fatal_error("permission denied.");
+			ft_strdel(&tmp);
+			ft_destroy_tab(envcp);
+			return (1);
+		}
+		i++;
+		ft_strdel(&tmp);
+	}
+	ft_fatal_error("command not found.");
+	ft_destroy_tab(envcp);
 	return (0);
 }

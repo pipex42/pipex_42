@@ -24,6 +24,8 @@ DSRC	=	srcs/
 DOBJ	=	objs/
 
 SRC		=	ft_getenv.c				\
+			ft_parsecmd.c			\
+			ft_checkcmd.c			\
 			main.c
 
 OBJ		=	$(patsubst %.c, $(DOBJ)%.o, $(SRC))
