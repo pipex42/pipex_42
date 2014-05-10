@@ -6,11 +6,8 @@
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/08 21:54:56 by niccheva          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2014/05/10 15:23:04 by niccheva         ###   ########.fr       */
-=======
+/*   Updated: 2014/05/10 15:39:00 by niccheva         ###   ########.fr       */
 /*   Updated: 2014/05/10 15:28:43 by anramos          ###   ########.fr       */
->>>>>>> 274585e7c4ed467d55722c8dd0a246ac6590ffa2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +50,6 @@ int			main(int ac, char **av, char **env)
 	char	*cmd1;
 	char	*cmd2;
 
-<<<<<<< HEAD
 	if (ac != 5)
 		ft_fatal_error("usage: ./pipex infile cmd1 cmd2 outfile.");
 	if ((path = ft_getenv("PATH", env)) == NULL)
@@ -67,19 +63,5 @@ int			main(int ac, char **av, char **env)
 /*	}*/
 /*	else
 	ft_putendl("NOT OK");*/
-=======
-	envset = ft_getenv("PATH", env);
-	cmd1 = ft_checkcmd(av[2], envset);
-	cmd2 = ft_checkcmd(av[3], envset);
-	if (ac != 5)
-		ft_fatal_error("too few/much arguments.");
-	if (cmd1 && cmd2)
-	{
-		if (ft_check_files(av[1], av[4]) == -1)
-			ft_fatal_error("invalid file.");
-		ft_exec_cmd(cmd1, cmd2, av, env);
-	}
-/*	sleep(5000);*/
->>>>>>> 274585e7c4ed467d55722c8dd0a246ac6590ffa2
 	return (0);
 }
