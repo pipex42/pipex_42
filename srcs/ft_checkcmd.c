@@ -6,7 +6,7 @@
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/09 19:43:38 by anramos           #+#    #+#             */
-/*   Updated: 2014/05/10 11:48:07 by niccheva         ###   ########.fr       */
+/*   Updated: 2014/05/10 09:14:00 by anramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ char		*ft_checkcmd(char *cmd, char *env)
 {
 	char	**envcp;
 	char	*tmp;
+	char	**cmdcp;
 	int		i;
 
 	i = 0;
 	envcp = ft_strsplit(env, ':');
+	cmdcp = ft_strsplit(cmd, ' ');
 	while (envcp[i])
 	{
-		tmp = ft_parsecmd(cmd, envcp[i]);
+		tmp = ft_parsecmd(cmdcp[0], envcp[i]);
 		if (access(tmp, F_OK) >= 0)
 		{
 			if (access(tmp, X_OK) < 0)
@@ -37,7 +39,7 @@ char		*ft_checkcmd(char *cmd, char *env)
 		ft_strdel(&tmp);
 		i++;
 	}
-	ft_destroy_tab(envcp);
 	ft_fatal_error("command not found.");
+	ft_destroy_tab(envcp);
 	return (0);
 }
