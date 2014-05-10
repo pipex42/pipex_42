@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_check_files.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/08 17:46:26 by niccheva          #+#    #+#             */
-/*   Updated: 2014/05/10 05:57:09 by anramos          ###   ########.fr       */
+/*   Created: 2014/05/10 01:20:53 by anramos           #+#    #+#             */
+/*   Updated: 2014/05/10 07:52:49 by anramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-#include "libft.h"
-#include <fcntl.h>
+/* Verifie l'existance du input file, et s'il est possible de modifier ou
+creer le output file */
 
-char		*ft_getenv(char *key, char **env);
-char		*ft_parsecmd(char *cenv, char *cmd);
-char		*ft_checkcmd(char *cmd, char *env);
-char		**ft_sflags(char *cmd);
-int			ft_check_files(char *file1, char *file2);
-
-#endif
+int		ft_check_files(char *file1, char *file2)
+{
+	if (open(file1, O_RDONLY) == -1)
+		return (-1);
+	if (open(file2, O_WRONLY | O_CREAT, 0777) == -1)
+		return (-1);
+	return (0);
+}

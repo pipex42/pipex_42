@@ -26,6 +26,8 @@ DOBJ	=	objs/
 SRC		=	ft_getenv.c				\
 			ft_parsecmd.c			\
 			ft_checkcmd.c			\
+			ft_sflags.c				\
+			ft_check_files.c		\
 			main.c
 
 OBJ		=	$(patsubst %.c, $(DOBJ)%.o, $(SRC))
