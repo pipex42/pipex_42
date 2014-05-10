@@ -6,7 +6,7 @@
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/08 21:54:56 by niccheva          #+#    #+#             */
-/*   Updated: 2014/05/10 08:46:46 by anramos          ###   ########.fr       */
+/*   Updated: 2014/05/10 11:17:29 by niccheva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int			main(int ac, char **av, char **env)
 	char	*cmd1;
 	char	*cmd2;
 
+	if (ac != 5)
+		ft_fatal_error("too few/much arguments.");
 	envset = ft_getenv("PATH", env);
 	cmd1 = ft_checkcmd(av[2], envset);
 	cmd2 = ft_checkcmd(av[3], envset);
-	if (ac != 5)
-		ft_fatal_error("too few/much arguments.");
 	if (cmd1 && cmd2)
 	{
 		if (ft_check_files(av[1], av[4]) == -1)
