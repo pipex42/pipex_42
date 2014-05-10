@@ -6,7 +6,7 @@
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/10 01:18:23 by anramos           #+#    #+#             */
-/*   Updated: 2014/05/10 08:43:50 by anramos          ###   ########.fr       */
+/*   Updated: 2014/05/10 09:07:42 by anramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ char	**ft_sflags(char *cmd)
 		return (NULL);
 	while (j < tab_len)
 	{
-		tab2[j] = tab[j + 1];
+		if (tab[j + 1])
+			tab2[j] = tab[j + 1];
 		j++;
 	}
-	tab2[j] = NULL;
+	tab2[j] = 0;
 	ft_destroy_tab(tab);
 	return (tab2);
 }
