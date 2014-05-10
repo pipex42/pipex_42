@@ -6,14 +6,14 @@
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/08 21:54:56 by niccheva          #+#    #+#             */
-/*   Updated: 2014/05/10 15:39:00 by niccheva         ###   ########.fr       */
-/*   Updated: 2014/05/10 15:28:43 by anramos          ###   ########.fr       */
+/*   Updated: 2014/05/10 17:10:39 by anramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "pipex.h"
 
-void		ft_exec_cmd(char *cmd1, char *cmd2, char **av, char **env)
+void		ft_exec_cmd(int fd, char **av, char **env)
 {
 	pid_t	pid;
 	int		pipe_fd[2];
@@ -29,7 +29,7 @@ void		ft_exec_cmd(char *cmd1, char *cmd2, char **av, char **env)
 		if (dup2(pipe_fd[0], 1) == -1)
 			ft_fatal_error("stdout redirect fail.");
 		close(pipe_fd[0]);
-		if (execve(cmd1, ft_strsplit(av[2], ' '), env) == -1)
+		if (execve(av[2], ft_strsplit(av[2], ' '), env) == -1)
 			ft_fatal_error("execute cmd1 failed.");
 	}
 	else
@@ -47,21 +47,16 @@ void		ft_exec_cmd(char *cmd1, char *cmd2, char **av, char **env)
 int			main(int ac, char **av, char **env)
 {
 	char	*path;
-	char	*cmd1;
-	char	*cmd2;
+	int		fd;
 
 	if (ac != 5)
 		ft_fatal_error("usage: ./pipex infile cmd1 cmd2 outfile.");
 	if ((path = ft_getenv("PATH", env)) == NULL)
 		ft_fatal_error("please enter a valid env.");
-	cmd1 = ft_checkcmd(av[2], path);
-	cmd2 = ft_checkcmd(av[3], path);
-/*	if (cmd1 && cmd2)
-	{*/
-		ft_check_files(av[1], av[4]);
-		ft_exec_cmd(cmd1, cmd2, av, env);
-/*	}*/
-/*	else
-	ft_putendl("NOT OK");*/
+	av[2] = ft_checkcmd(av[2], path);
+	av[3] = ft_checkcmd(av[3], path);
+	fd = ft_check_files(av[1], av[4]);
+	ft_exec_cmd(fd, av, env);
+	ft_putnbr(fd);
 	return (0);
 }
