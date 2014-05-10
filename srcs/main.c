@@ -6,7 +6,7 @@
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/08 21:54:56 by niccheva          #+#    #+#             */
-/*   Updated: 2014/05/10 11:17:29 by niccheva         ###   ########.fr       */
+/*   Updated: 2014/05/10 15:23:04 by niccheva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,22 @@ void		ft_exec_cmd(char *cmd1, char *cmd2, char **av, char **env)
 
 int			main(int ac, char **av, char **env)
 {
-	char	*envset;
+	char	*path;
 	char	*cmd1;
 	char	*cmd2;
 
 	if (ac != 5)
-		ft_fatal_error("too few/much arguments.");
-	envset = ft_getenv("PATH", env);
-	cmd1 = ft_checkcmd(av[2], envset);
-	cmd2 = ft_checkcmd(av[3], envset);
-	if (cmd1 && cmd2)
-	{
-		if (ft_check_files(av[1], av[4]) == -1)
-			ft_fatal_error("invalid file.");
+		ft_fatal_error("usage: ./pipex infile cmd1 cmd2 outfile.");
+	if ((path = ft_getenv("PATH", env)) == NULL)
+		ft_fatal_error("please enter a valid env.");
+	cmd1 = ft_checkcmd(av[2], path);
+	cmd2 = ft_checkcmd(av[3], path);
+/*	if (cmd1 && cmd2)
+	{*/
+		ft_check_files(av[1], av[4]);
 		ft_exec_cmd(cmd1, cmd2, av, env);
-	}
-	else
-		ft_putendl("NOT OK");
-/*	sleep(5000);*/
+/*	}*/
+/*	else
+	ft_putendl("NOT OK");*/
 	return (0);
 }

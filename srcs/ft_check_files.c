@@ -6,7 +6,7 @@
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/10 01:20:53 by anramos           #+#    #+#             */
-/*   Updated: 2014/05/10 07:52:49 by anramos          ###   ########.fr       */
+/*   Updated: 2014/05/10 15:12:25 by niccheva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,19 @@
 /* Verifie l'existance du input file, et s'il est possible de modifier ou
 creer le output file */
 
-int		ft_check_files(char *file1, char *file2)
+void		ft_check_files(char *file1, char *file2)
 {
-	if (open(file1, O_RDONLY) == -1)
-		return (-1);
-	if (open(file2, O_WRONLY | O_CREAT, 0777) == -1)
-		return (-1);
-	return (0);
+	if (!access(file1, F_OK))
+	{
+		if (access(file1, R_OK))
+			ft_fatal_error("infile: permission denied.");
+		return ;
+	}
+	else
+		ft_fatal_error("infile: no such file.");
+	if (access(file2, F_OK))
+	{
+		if (access(file2, W_OK))
+			ft_fatal_error("outfile: permission denied.");
+	}
 }

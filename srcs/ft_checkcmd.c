@@ -6,7 +6,7 @@
 /*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/09 19:43:38 by anramos           #+#    #+#             */
-/*   Updated: 2014/05/10 11:48:07 by niccheva         ###   ########.fr       */
+/*   Updated: 2014/05/10 15:23:02 by niccheva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ char		*ft_checkcmd(char *cmd, char *env)
 	int		i;
 
 	i = 0;
+	cmd = ft_strtrim(cmd);
 	envcp = ft_strsplit(env, ':');
 	while (envcp[i])
 	{
 		tmp = ft_parsecmd(cmd, envcp[i]);
-		if (access(tmp, F_OK) >= 0)
+		if (!access(tmp, F_OK))
 		{
-			if (access(tmp, X_OK) < 0)
+			if (access(tmp, X_OK))
 				ft_fatal_error("permission denied.");
 			ft_destroy_tab(envcp);
 			return (tmp);
@@ -39,5 +40,5 @@ char		*ft_checkcmd(char *cmd, char *env)
 	}
 	ft_destroy_tab(envcp);
 	ft_fatal_error("command not found.");
-	return (0);
+	return (NULL);
 }
