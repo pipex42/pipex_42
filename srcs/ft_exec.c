@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niccheva <niccheva@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anramos <anramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/10 23:10:38 by niccheva          #+#    #+#             */
-/*   Updated: 2014/05/11 11:09:47 by niccheva         ###   ########.fr       */
+/*   Updated: 2014/05/11 16:05:41 by anramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		ft_exec_son(char *cmd, int *pfd, int fd, char **env)
 	tab = ft_strsplit(cmd, ' ');
 	ft_strdel(&cmd);
 	execve(tab[0], tab, env);
-	ft_putchar('a');
+	ft_fatal_error("Child Exec failed.");
 }
 
 static void     ft_exec_father(char *cmd, int *pfd, int fd, char **env)
@@ -38,7 +38,7 @@ static void     ft_exec_father(char *cmd, int *pfd, int fd, char **env)
 	tab = ft_strsplit(cmd, ' ');
 	ft_strdel(&cmd);
 	execve(tab[0], tab, env);
-	ft_putchar('v');
+	ft_fatal_error("Parent Exec failed.");
 }
 
 void			ft_exec(char *cmd1, char *cmd2, char **av, char **env)
